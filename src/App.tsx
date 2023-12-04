@@ -1,5 +1,15 @@
+import { Outlet } from "react-router-dom";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+
 function App() {
-  return <h1>THIS IS THE DEFAULT SETUP FILE</h1>;
+  return (
+    <>
+      <Header />
+      <Outlet />
+      <Footer />
+    </>
+  );
 }
 
 export default App;

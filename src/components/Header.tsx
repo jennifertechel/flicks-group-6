@@ -1,7 +1,7 @@
-import { Flex, Heading, Box, Input, IconButton } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Flex, Heading, IconButton, Input } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);

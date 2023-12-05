@@ -1,5 +1,5 @@
 import { Box, Flex, Image, Text, Tooltip } from '@chakra-ui/react';
-import React from 'react';
+
 
 interface ThumbnailProps {
   image: string;

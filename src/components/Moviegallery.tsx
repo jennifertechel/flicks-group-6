@@ -10,7 +10,7 @@ interface Movie {
   genre: string;
 }
 
-const MovieGallery: React.FC = () => {
+function MovieGallery() {
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent:'space-evenly' }}>
       {data.map((movie: Movie) => (
@@ -25,6 +25,6 @@ const MovieGallery: React.FC = () => {
       ))}
     </div>
   );
-};
+}
 
 export default MovieGallery;

@@ -1,29 +1,30 @@
 import React from 'react';
-import data from "../../data/movies.json";
-import Thumbnail from "./Thumbnail";
+import data from '../../data/movies.json';
+import Thumbnail from './Thumbnail';
 
 interface Movie {
-    title: string;
-    year: number;
-    rating: string;
-    thumbnail: string;
-    genre:string
-  }
-  const MovieGallery: React.FC = () => {
+  title: string;
+  year: number;
+  rating: string;
+  thumbnail: string;
+  genre: string;
+}
+
+const MovieGallery: React.FC = () => {
   return (
-    <div>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent:'space-evenly' }}>
       {data.map((movie: Movie) => (
         <Thumbnail
-        genre={movie.genre}
-        title={movie.title}
-        key={movie.title} 
-        image={movie.thumbnail}
-        rating={movie.rating}
-        year={movie.year}
-      />
+          genre={movie.genre}
+          title={movie.title}
+          key={movie.title}
+          image={movie.thumbnail}
+          rating={movie.rating}
+          year={movie.year}
+        />
       ))}
     </div>
   );
-}
+};
 
 export default MovieGallery;

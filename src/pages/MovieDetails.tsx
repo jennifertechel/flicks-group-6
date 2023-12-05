@@ -1,4 +1,12 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Flex,
+  Heading,
+  Image,
+  Spacer,
+  Text,
+} from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 type Movie = {
@@ -24,19 +32,30 @@ function MovieDetails({ movies }: { movies: Movie[] }) {
   }
 
   return (
-    <Flex flexDir="row">
-      <Box>{movie.thumbnail}</Box>
-      <Flex flexDir="column">
-        <Heading>{movie.title}</Heading>
-        <Box>
-          <Text>From {movie.year}</Text>
-          <Text>{movie.rating}</Text>
+    <Center>
+      <Flex flexDir="row">
+        <Box p="4">
+          <Image src={movie.thumbnail} />
         </Box>
-        <Text>Actors: {movie.actors.join(", ")}</Text>{" "}
-        <Text>Genre: {movie.genre}</Text>
-        <Text>{movie.synopsis}</Text>
+        <Flex flexDir="column" p="4" w={456}>
+          <Heading>{movie.title}</Heading>
+          <Flex flexDir="row" py="4">
+            <Text>From {movie.year}</Text>
+            <Spacer />
+            <Text>{movie.rating}</Text>
+          </Flex>
+          <Text pb="4">
+            Actors:
+            <br /> {movie.actors.join(", ")}
+          </Text>{" "}
+          <Text pb="4">
+            Genre:
+            <br /> {movie.genre}
+          </Text>
+          <Text>{movie.synopsis}</Text>
+        </Flex>
       </Flex>
-    </Flex>
+    </Center>
   );
 }
 

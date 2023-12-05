@@ -1,4 +1,5 @@
-import movies from './data/movies.json';
+import React from 'react';
+import data from "../../data/movies.json";
 import Thumbnail from "./Thumbnail";
 
 interface Movie {
@@ -6,12 +7,15 @@ interface Movie {
     year: number;
     rating: string;
     thumbnail: string;
+    genre:string
   }
   const MovieGallery: React.FC = () => {
   return (
     <div>
-      {movies.map((movie: Movie) => (
+      {data.map((movie: Movie) => (
         <Thumbnail
+        genre={movie.genre}
+        title={movie.title}
         key={movie.title} 
         image={movie.thumbnail}
         rating={movie.rating}

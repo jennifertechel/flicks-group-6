@@ -10,10 +10,12 @@ interface Movie {
   genre: string;
 }
 
-function MovieGallery() {
+function RecommendedGallery() {
+  const RecommendedMovies = data.slice(0, 5); 
+
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent:'space-evenly' }}>
-      {data.map((movie: Movie) => (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'space-evenly' }}>
+      {RecommendedMovies.map((movie: Movie) => (
         <Thumbnail
           genre={movie.genre}
           title={movie.title}
@@ -27,4 +29,4 @@ function MovieGallery() {
   );
 }
 
-export default MovieGallery;
+export default RecommendedGallery;

@@ -28,16 +28,16 @@ function MovieDetails({ movies }: { movies: Movie[] }) {
   );
 
   if (!movie) {
-    return <Text>Movie not found</Text>;
+    return <Text>The movie was not found</Text>;
   }
 
   return (
     <Center>
-      <Flex flexDir="row">
+      <Flex flexDir={["column", "column", "row"]}>
         <Box p="4">
           <Image src={movie.thumbnail} />
         </Box>
-        <Flex flexDir="column" p="4" w={456}>
+        <Flex flexDir="column" p="4" w={[300, 400, 500]}>
           <Heading>{movie.title}</Heading>
           <Flex flexDir="row" py="4">
             <Text>From {movie.year}</Text>

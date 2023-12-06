@@ -1,4 +1,5 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import React from "react";
 import data from "../../data/movies.json";
 
 function Categories() {

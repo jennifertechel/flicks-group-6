@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
-import { describe, expect, it } from "vitest";
+import { describe, expect } from "vitest";
 import MovieDetails from "./MovieDetails";
 
 describe("MovieDetails", () => {
@@ -15,7 +15,7 @@ describe("MovieDetails", () => {
     },
   ];
 
-  it("renders movie details correctly", () => {
+  test("renders movie details correctly", () => {
     render(
       <MemoryRouter initialEntries={["/movies/Inception"]}>
         <Routes>
@@ -37,7 +37,7 @@ describe("MovieDetails", () => {
     expect(screen.getByText("A mind-bending thriller.")).toBeTruthy();
   });
 
-  it('displays "Movie not found" for missing movie', () => {
+  test('displays "Movie not found" for missing movie', () => {
     render(
       <MemoryRouter initialEntries={["/movies/NonExistingMovie"]}>
         <Routes>

@@ -52,7 +52,7 @@ function Carousel() {
           transition: 'transform 0.5s ease-in-out',
         }}
       >
-        {moviesToDisplay.map((movie: Movie, index: number) => (
+        {moviesToDisplay.map((movie: Movie) => (
           <Box
             key={movie.title}
             display="inline-block"

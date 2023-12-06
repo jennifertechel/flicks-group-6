@@ -1,16 +1,16 @@
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import {
   Route,
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import Home from "./pages/Home";
+import App from "./App";
 import Categories from "./pages/Categories";
 import Favorites from "./pages/Favorites";
+import Home from "./pages/Home";
 import MovieDetails from "./pages/MovieDetails";
 
 import "@fontsource/bebas-neue/400.css";

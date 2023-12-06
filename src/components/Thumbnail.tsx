@@ -1,6 +1,7 @@
 import { Box, Flex, IconButton, Image, Text, Tooltip } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 interface ThumbnailProps {
   image: string;
@@ -13,9 +14,24 @@ interface ThumbnailProps {
 function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
   const [isLiked, setIsLiked] = useState(false);
 
-  const toggleLike = () => {
+  const [likedMovies, setLikedMovies] = useLocalStorage("likedMovies", []);
+
+  useEffect(() => {
+    setIsLiked(likedMovies.includes(title));
+  }, [likedMovies, title]);
+
+  function toggleLike() {
     setIsLiked(!isLiked);
-  };
+
+    if (!isLiked) {
+      setLikedMovies([...likedMovies, title]);
+    } else {
+      const updatedLikedMovies = likedMovies.filter(
+        (likedMovie: string | undefined) => likedMovie !== title
+      );
+      setLikedMovies(updatedLikedMovies);
+    }
+  }
 
   return (
     <Box

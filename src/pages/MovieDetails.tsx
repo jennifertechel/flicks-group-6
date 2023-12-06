@@ -3,10 +3,13 @@ import {
   Center,
   Flex,
   Heading,
+  IconButton,
   Image,
   Spacer,
   Text,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import { GoHeart, GoHeartFill } from "react-icons/go";
 import { useParams } from "react-router-dom";
 
 type Movie = {
@@ -22,6 +25,7 @@ type Movie = {
 
 function MovieDetails({ movies }: { movies: Movie[] }) {
   const { movieTitle } = useParams();
+  const [isLiked, setIsLiked] = useState(false);
 
   const movie = movies.find(
     (movie: { title: string | undefined }) => movie.title === movieTitle
@@ -30,6 +34,10 @@ function MovieDetails({ movies }: { movies: Movie[] }) {
   if (!movie) {
     return <Text>The movie was not found</Text>;
   }
+
+  const toggleLike = () => {
+    setIsLiked(!isLiked);
+  };
 
   return (
     <Center>
@@ -52,7 +60,17 @@ function MovieDetails({ movies }: { movies: Movie[] }) {
             Genre:
             <br /> {movie.genre}
           </Text>
-          <Text>{movie.synopsis}</Text>
+          <Text pb="4">{movie.synopsis}</Text>
+          <IconButton
+            icon={isLiked ? <GoHeartFill /> : <GoHeart />}
+            aria-label={isLiked ? "Liked" : "Not liked"}
+            fontSize={24}
+            w="fit-content"
+            bg="none"
+            color="white"
+            _hover={{ bg: "none" }}
+            onClick={toggleLike}
+          />
         </Flex>
       </Flex>
     </Center>

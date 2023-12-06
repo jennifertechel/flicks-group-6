@@ -1,5 +1,6 @@
-import { Box, Flex, Image, Text, Tooltip } from '@chakra-ui/react';
-
+import { Box, Flex, IconButton, Image, Text, Tooltip } from "@chakra-ui/react";
+import { useState } from "react";
+import { GoHeart, GoHeartFill } from "react-icons/go";
 
 interface ThumbnailProps {
   image: string;
@@ -10,6 +11,12 @@ interface ThumbnailProps {
 }
 
 function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
+  const [isLiked, setIsLiked] = useState(false);
+
+  const toggleLike = () => {
+    setIsLiked(!isLiked);
+  };
+
   return (
     <Box
       maxW="200px"
@@ -22,7 +29,7 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
       p="2"
       position="relative"
       transition="transform 0.3s"
-      _hover={{ transform: 'scale(1.05)' }}
+      _hover={{ transform: "scale(1.05)" }}
     >
       <Image src={image} alt="Movie Thumbnail" />
       <Box
@@ -36,7 +43,7 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
         bottom="0"
         opacity="0"
         transition="opacity 0.3s"
-        _hover={{ opacity: '1' }}
+        _hover={{ opacity: "1" }}
       >
         <Flex direction="column" alignItems="center">
           <Text fontSize="sm" fontWeight="bold">
@@ -45,8 +52,23 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
           <Tooltip label={`Rating: ${rating}`} placement="top">
             <Text fontSize="sm">Rating: {rating}</Text>
           </Tooltip>
-          <Text fontSize="sm">Year: {year}</Text>
-          <Text fontSize="sm">Genre: {genre}</Text>
+
+          <Flex direction="row" justify="space-between">
+            <Box>
+              <Text fontSize="sm">Year: {year}</Text>
+              <Text fontSize="sm">Genre: {genre}</Text>
+            </Box>
+            <IconButton
+              icon={isLiked ? <GoHeartFill /> : <GoHeart />}
+              aria-label={isLiked ? "Liked" : "Not liked"}
+              fontSize={24}
+              w="fit-content"
+              bg="none"
+              color="white"
+              _hover={{ bg: "none" }}
+              onClick={toggleLike}
+            />
+          </Flex>
         </Flex>
       </Box>
     </Box>

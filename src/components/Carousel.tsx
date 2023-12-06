@@ -1,6 +1,6 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { Box, Flex, IconButton } from '@chakra-ui/react';
 import { useState } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import data from '../../data/movies.json';
 import Thumbnail from './Thumbnail';
 
@@ -40,11 +40,12 @@ function Carousel() {
     <Flex justifyContent="center" alignItems="center"  >
       <IconButton
         aria-label="Previous"
-        icon={<ChevronLeftIcon />}
+        icon={<FaChevronLeft />}
         onClick={handlePrev}
         left="0"
         top="50%"
         zIndex="1"
+        position="absolute"
       />
       <Flex
         maxWidth="100%"
@@ -73,7 +74,7 @@ function Carousel() {
       </Flex>
       <IconButton
         aria-label="Next"
-        icon={<ChevronRightIcon />}
+        icon={<FaChevronRight />}
         onClick={handleNext}
         position="absolute"
         right="0"

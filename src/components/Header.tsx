@@ -22,9 +22,10 @@ function Header() {
   const handleSearchClick = () => {
     setIsSearchOpen(!isSearchOpen);
   };
+
   return (
     <Flex
-      px={{ base: 5, md: 20 }}
+      px={{ base: 5, lg: 20 }}
       py={3}
       justify="space-between"
       align="center"
@@ -93,10 +94,14 @@ function Header() {
                 alignItems="center"
               >
                 <Heading order={3}>
-                  <Link to="categories">Categories</Link>
+                  <Link to="categories" onClick={onClose}>
+                    Categories
+                  </Link>
                 </Heading>
                 <Heading order={3}>
-                  <Link to="favorites">Favorites</Link>
+                  <Link to="favorites" onClick={onClose}>
+                    Favorites
+                  </Link>
                 </Heading>
               </Flex>
             </DrawerBody>

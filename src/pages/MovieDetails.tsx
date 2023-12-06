@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { useParams } from "react-router-dom";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 type Movie = {
   title: string;
@@ -25,7 +26,8 @@ type Movie = {
 
 function MovieDetails({ movies }: { movies: Movie[] }) {
   const { movieTitle } = useParams();
-  const [isLiked, setIsLiked] = useState(false);
+  const [likedMovies, setLikedMovies] = useLocalStorage("likedMovies", []);
+  const [isLiked, setIsLiked] = useState(likedMovies.includes(movieTitle));
 
   const movie = movies.find(
     (movie: { title: string | undefined }) => movie.title === movieTitle
@@ -35,9 +37,22 @@ function MovieDetails({ movies }: { movies: Movie[] }) {
     return <Text>The movie was not found</Text>;
   }
 
-  const toggleLike = () => {
-    setIsLiked(!isLiked);
-  };
+  function toggleLike() {
+    const isAlreadyLiked = likedMovies.includes(movieTitle);
+
+    if (!isAlreadyLiked) {
+      setLikedMovies([...likedMovies, movieTitle]);
+      setIsLiked(true);
+    } else {
+      setLikedMovies(
+        likedMovies.filter(
+          (likedMovie: string | undefined) => likedMovie !== movieTitle
+        )
+      );
+      setIsLiked(false);
+    }
+    console.log("sant eller falskt", setIsLiked);
+  }
 
   return (
     <Center>

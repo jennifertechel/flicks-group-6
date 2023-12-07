@@ -1,4 +1,5 @@
-import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { describe, expect } from "vitest";
 import MovieDetails from "./MovieDetails";
@@ -50,5 +51,29 @@ describe("MovieDetails", () => {
     );
 
     expect(screen.getByText("The movie was not found")).toBeTruthy();
+  });
+
+  it("toggles movie like status", () => {
+    render(
+      <MemoryRouter initialEntries={["/movies/Inception"]}>
+        <Routes>
+          <Route
+            path="/movies/:movieTitle"
+            element={<MovieDetails movies={movies} />}
+          />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    const likeButton = screen.getByLabelText("Not liked");
+    expect(likeButton).toBeTruthy();
+
+    fireEvent.click(likeButton);
+
+    expect(screen.getByLabelText("Liked")).toBeTruthy();
+
+    fireEvent.click(likeButton);
+
+    expect(screen.getByLabelText("Not liked")).toBeTruthy();
   });
 });

@@ -9,6 +9,10 @@ const genres = Array.from(
 	new Set(data.flatMap((movie) => movie.genre.split(", ")))
 );
 
+const genres = Array.from(
+	new Set(data.flatMap((movie) => movie.genre.split(", ")))
+);
+
 function Categories() {
 	return (
 		<Flex flexDir="column" px={35}>

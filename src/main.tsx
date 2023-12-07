@@ -17,6 +17,7 @@ import "@fontsource/bebas-neue/400.css";
 import "@fontsource/montserrat/400.css";
 
 import data from "../data/movies.json";
+import SearchResults from "./pages/SearchResults";
 
 const theme = extendTheme({
   styles: {
@@ -44,6 +45,7 @@ const router = createBrowserRouter(
         path="/movies/:movieTitle"
         element={<MovieDetails movies={data} />}
       />
+      <Route path="search-results/:term" element={<SearchResults />} />
     </Route>
   )
 );

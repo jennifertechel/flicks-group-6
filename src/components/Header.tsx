@@ -10,17 +10,46 @@ import {
   DrawerContent,
   DrawerBody,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
+import data from "../../data/movies.json";
+
+interface Movie {
+  title: string;
+  year: number;
+  rating: string;
+  thumbnail: string;
+  genre: string;
+}
 
 function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
+  const navigate = useNavigate();
 
   const handleSearchClick = () => {
     setIsSearchOpen(!isSearchOpen);
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+  };
+
+  const handleSearchKeyDown = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (event.key === "Enter") {
+      filterMovies(searchTerm);
+    }
+  };
+
+  const filterMovies = (term: string) => {
+    navigate(`/search-results/${term}`);
   };
 
   return (
@@ -52,8 +81,11 @@ function Header() {
               placeholder="Search..."
               size="sm"
               marginTop="3px"
-              role="search"
+              type="search"
               data-testid="search-input"
+              value={searchTerm}
+              onChange={handleInputChange}
+              onKeyDown={handleSearchKeyDown}
             />
           )}
         </Flex>

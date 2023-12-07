@@ -51,7 +51,6 @@ function MovieDetails({ movies }: { movies: Movie[] }) {
       );
       setIsLiked(false);
     }
-    console.log("sant eller falskt", setIsLiked);
   }
 
   return (
@@ -78,11 +77,13 @@ function MovieDetails({ movies }: { movies: Movie[] }) {
           <Text pb="4">{movie.synopsis}</Text>
           <IconButton
             icon={isLiked ? <GoHeartFill /> : <GoHeart />}
+            data-testid="like-button"
             aria-label={isLiked ? "Liked" : "Not liked"}
             fontSize={24}
             w="fit-content"
             bg="none"
             color="white"
+            ml="auto"
             _hover={{ bg: "none" }}
             onClick={toggleLike}
           />

@@ -20,6 +20,6 @@ test('renders thumbnail image properly', () => {
     />
   );
 
-  const thumbnailImage = screen.getByAltText('Movie Thumbnail');
-  expect(thumbnailImage).toBeTruthy(); // Using toBeTruthy() instead of toBeInTheDocument()
+  const thumbnailImage = screen.queryByAltText("The Godfather");
+  expect(thumbnailImage).toBeTruthy(); 
 });

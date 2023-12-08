@@ -24,7 +24,7 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
       transition="transform 0.3s"
       _hover={{ transform: 'scale(1.05)' }}
     >
-      <Image src={image} alt="Movie Thumbnail" />
+      <Image src={image} alt={title} />
       <Box
         bg="rgba(0, 0, 0, 0.7)"
         p="2"

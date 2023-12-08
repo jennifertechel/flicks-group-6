@@ -22,8 +22,7 @@ describe("Thumbnail component", () => {
     );
   const thumbnailImage = screen.queryByAltText("The Godfather");
   expect(thumbnailImage).toBeTruthy(); 
-
-    
+ 
   });
 
   test("toggles like button state", () => {

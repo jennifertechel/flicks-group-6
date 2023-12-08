@@ -1,4 +1,4 @@
-import { Flex, Heading } from "@chakra-ui/react";
+import { Flex, Heading, Text } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import data from "../../data/movies.json";
 import Thumbnail from "../components/Thumbnail";
@@ -20,19 +20,25 @@ function SearchResults() {
 
   return (
     <Flex direction="column" align="center" py={10}>
-      <Heading mb={10}>Search Results for "{term}"</Heading>
-      <Flex flexWrap="wrap" justifyContent="center" gap={10}>
-        {filteredMovies.map((movie) => (
-          <Thumbnail
-            key={movie.title}
-            image={movie.thumbnail}
-            rating={movie.rating}
-            year={movie.year}
-            title={movie.title}
-            genre={movie.genre}
-          />
-        ))}
-      </Flex>
+      <Heading mb={10} data-testid="search-heading">
+        Search Results for "{term}"
+      </Heading>
+      {filteredMovies.length === 0 ? (
+        <Text>No results found</Text>
+      ) : (
+        <Flex flexWrap="wrap" justifyContent="center" gap={10}>
+          {filteredMovies.map((movie) => (
+            <Thumbnail
+              key={movie.title}
+              image={movie.thumbnail}
+              rating={movie.rating}
+              year={movie.year}
+              title={movie.title}
+              genre={movie.genre}
+            />
+          ))}
+        </Flex>
+      )}
     </Flex>
   );
 }

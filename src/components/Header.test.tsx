@@ -1,10 +1,16 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, act } from "@testing-library/react";
 import { expect, test } from "vitest";
 import { userEvent } from "@testing-library/user-event";
 import "@testing-library/jest-dom";
-import { MemoryRouter } from "react-router-dom"; // Import MemoryRouter
+import { BrowserRouter, MemoryRouter, Route, Routes } from "react-router-dom"; // Import MemoryRouter
 
 import Header from "./Header";
+import App from "../App";
+import Home from "../pages/Home";
+import SearchResults from "../pages/SearchResults";
+import Categories from "../pages/Categories";
+import Favorites from "../pages/Favorites";
+import MovieDetails from "../pages/MovieDetails";
 
 // Default test to make sure that logo is rendered
 test("should render render logo", () => {
@@ -17,6 +23,25 @@ test("should render render logo", () => {
   expect(logo).toBeInTheDocument();
 });
 
+test("rendering test", async () => {
+  render(
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="categories" element={<Categories />} />
+        <Route path="favorites" element={<Favorites />} />
+
+        <Route path="search-results/:term" element={<SearchResults />} />
+      </Routes>
+    </BrowserRouter>
+  );
+
+  await waitFor(() => {
+    const h1 = screen.queryByText("Home");
+    expect(h1).toBeInTheDocument();
+  });
+});
+
 test("display search field after click", async () => {
   render(
     <MemoryRouter>
@@ -24,12 +49,94 @@ test("display search field after click", async () => {
     </MemoryRouter>
   );
   const user = userEvent.setup();
-  const iconButton = screen.getByTestId("search-button");
+  const iconButton = screen.getByLabelText("Search");
   await user.click(iconButton);
 
   await waitFor(() => {
-    const searchField = screen.queryByTestId("search-input");
+    const searchField = screen.queryByPlaceholderText("Search...");
 
     expect(searchField).toBeInTheDocument();
   });
+});
+
+test("get rerouted when typing in input", async () => {
+  render(
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route index element={<Home />} />
+          <Route path="search-results/:term" element={<SearchResults />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+
+  const user = userEvent.setup();
+
+  const iconButton = screen.getByLabelText("Search");
+  expect(iconButton).toBeInTheDocument();
+  await user.click(iconButton);
+
+  const searchField = screen.getByPlaceholderText("Search...");
+  expect(searchField).toBeInTheDocument();
+  await user.type(searchField, "hello");
+
+  const searchResultsHeading = await waitFor(() =>
+    screen.queryByText('Search Results for "hello"')
+  );
+  expect(searchResultsHeading).toBeInTheDocument();
+});
+
+test("display error when movie doesn't exist", async () => {
+  render(
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route index element={<Home />} />
+          <Route path="search-results/:term" element={<SearchResults />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+
+  const user = userEvent.setup();
+
+  const iconButton = screen.getByLabelText("Search");
+  expect(iconButton).toBeInTheDocument();
+  await user.click(iconButton);
+
+  const searchField = screen.getByPlaceholderText("Search...");
+  expect(searchField).toBeInTheDocument();
+  await user.type(searchField, "hello");
+
+  const error = await waitFor(() => screen.queryByText("No results found"));
+  expect(error).toBeInTheDocument();
+});
+
+test("display thumbnail after search", async () => {
+  render(
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route index element={<Home />} />
+          <Route path="search-results/:term" element={<SearchResults />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+
+  const user = userEvent.setup();
+
+  const iconButton = screen.getByLabelText("Search");
+  expect(iconButton).toBeInTheDocument();
+  await user.click(iconButton);
+
+  const searchField = screen.getByPlaceholderText("Search...");
+  expect(searchField).toBeInTheDocument();
+  await user.type(searchField, "godfather");
+
+  const movieTitle = await waitFor(() =>
+    screen.queryByAltText("The Godfather")
+  );
+  expect(movieTitle).toBeInTheDocument();
 });

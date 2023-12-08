@@ -9,18 +9,42 @@ import {
   DrawerCloseButton,
   DrawerContent,
   DrawerBody,
+  InputRightElement,
+  InputGroup,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { IoClose } from "react-icons/io5";
 
 function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
   const handleSearchClick = () => {
     setIsSearchOpen(!isSearchOpen);
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+    if (term.trim() === "") {
+      navigate("/");
+    } else {
+      filterMovies(term);
+    }
+  };
+
+  const handleClearInput = () => {
+    setSearchTerm("");
+    navigate("/");
+  };
+
+  const filterMovies = (term: string) => {
+    navigate(`/search-results/${term}`);
   };
 
   return (
@@ -44,17 +68,25 @@ function Header() {
             color="white"
             marginRight={isSearchOpen ? "5px" : 0}
             _hover={{ bg: "none" }}
-            data-testid="search-button"
           />
 
           {isSearchOpen && (
-            <Input
-              placeholder="Search..."
-              size="sm"
-              marginTop="3px"
-              role="search"
-              data-testid="search-input"
-            />
+            <InputGroup>
+              <Input
+                placeholder="Search..."
+                size="sm"
+                marginTop="3px"
+                data-testid="search-input"
+                value={searchTerm}
+                focusBorderColor="white"
+                onChange={handleInputChange}
+              />
+              <InputRightElement>
+                {searchTerm && (
+                  <IoClose cursor="pointer" onClick={handleClearInput} />
+                )}
+              </InputRightElement>
+            </InputGroup>
           )}
         </Flex>
         {/** Desktop */}

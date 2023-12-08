@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useNavigate } from "react-router-dom";
 
 interface ThumbnailProps {
   image: string;
@@ -23,6 +24,12 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
   const [isLiked, setIsLiked] = useState(false);
 
   const [likedMovies, setLikedMovies] = useLocalStorage("likedMovies", []);
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/movies/${encodeURIComponent(title)}`);
+  };
 
   useEffect(() => {
     setIsLiked(likedMovies.includes(title));
@@ -52,6 +59,8 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
       position="relative"
       transition="transform 0.3s"
       _hover={{ transform: "scale(1.05)" }}
+      onClick={handleClick}
+      cursor="pointer"
     >
       <Image src={image} alt={title} />
       <Box

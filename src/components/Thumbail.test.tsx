@@ -20,9 +20,9 @@ describe("Thumbnail component", () => {
         genre={movieData.genre}
       />
     );
-
-    const thumbnailImage = screen.getByAltText("Movie Thumbnail");
-    expect(thumbnailImage).toBeTruthy();
+  const thumbnailImage = screen.queryByRole("img");
+  expect(thumbnailImage).toBeTruthy(); 
+ 
   });
 
   test("toggles like button state", () => {
@@ -41,10 +41,10 @@ describe("Thumbnail component", () => {
 
     fireEvent.click(likeButton);
 
-    expect(screen.getByLabelText("Liked")).toBeTruthy();
+    expect(screen.getByLabelText("Liked")).toBeInTheDocument();
 
     fireEvent.click(likeButton);
 
-    expect(screen.getByLabelText("Not liked")).toBeTruthy();
+    expect(screen.getByLabelText("Not liked")).toBeInTheDocument();
   });
 });

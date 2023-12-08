@@ -2,10 +2,10 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import {
-  Route,
-  RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
+  Route,
+  RouterProvider,
 } from "react-router-dom";
 import App from "./App";
 import Categories from "./pages/Categories";
@@ -15,6 +15,8 @@ import MovieDetails from "./pages/MovieDetails";
 
 import "@fontsource/bebas-neue/400.css";
 import "@fontsource/montserrat/400.css";
+
+import data from "../data/movies.json";
 
 const theme = extendTheme({
   styles: {
@@ -38,8 +40,10 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="categories" element={<Categories />} />
       <Route path="favorites" element={<Favorites />} />
-      {/** Add specific id/title here */}
-      <Route path="movies/:title" element={<MovieDetails />} />
+      <Route
+        path="/movies/:movieTitle"
+        element={<MovieDetails movies={data} />}
+      />
     </Route>
   )
 );

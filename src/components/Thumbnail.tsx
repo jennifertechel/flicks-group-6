@@ -1,5 +1,15 @@
-import { Box, Flex, Image, Text, Tooltip } from '@chakra-ui/react';
-
+import {
+  Box,
+  Flex,
+  Heading,
+  IconButton,
+  Image,
+  Text,
+  Tooltip,
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { GoHeart, GoHeartFill } from "react-icons/go";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 interface ThumbnailProps {
   image: string;
@@ -10,43 +20,77 @@ interface ThumbnailProps {
 }
 
 function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
+  const [isLiked, setIsLiked] = useState(false);
+
+  const [likedMovies, setLikedMovies] = useLocalStorage("likedMovies", []);
+
+  useEffect(() => {
+    setIsLiked(likedMovies.includes(title));
+  }, [likedMovies, title]);
+
+  function toggleLike() {
+    setIsLiked(!isLiked);
+
+    if (!isLiked) {
+      setLikedMovies([...likedMovies, title]);
+    } else {
+      const updatedLikedMovies = likedMovies.filter(
+        (likedMovie: string | undefined) => likedMovie !== title
+      );
+      setLikedMovies(updatedLikedMovies);
+    }
+  }
+
   return (
     <Box
       maxW="200px"
-      textAlign="center"
-      justifyContent="center"
+      alignItems="flex-start"
       boxShadow="0 4px 8px 0 rgba(0, 0, 0, 0.2)"
       borderRadius="md"
       overflow="hidden"
       bg="white"
-      p="2"
       position="relative"
       transition="transform 0.3s"
-      _hover={{ transform: 'scale(1.05)' }}
+      _hover={{ transform: "scale(1.05)" }}
     >
-      <Image src={image} alt="Movie Thumbnail" />
+      <Image src={image} alt={title} />
       <Box
         bg="rgba(0, 0, 0, 0.7)"
         p="2"
         color="white"
         position="absolute"
-        top="0"
+        top="190"
         left="0"
         right="0"
         bottom="0"
         opacity="0"
         transition="opacity 0.3s"
-        _hover={{ opacity: '1' }}
+        _hover={{ opacity: "1" }}
       >
-        <Flex direction="column" alignItems="center">
-          <Text fontSize="sm" fontWeight="bold">
+        <Flex direction="column">
+          <Heading fontSize="xl" pb="2">
             {title}
-          </Text>
+          </Heading>
           <Tooltip label={`Rating: ${rating}`} placement="top">
-            <Text fontSize="sm">Rating: {rating}</Text>
+            <Text fontSize="sm">{rating}</Text>
           </Tooltip>
-          <Text fontSize="sm">Year: {year}</Text>
-          <Text fontSize="sm">Genre: {genre}</Text>
+
+          <Flex direction="row" justify="space-between">
+            <Box>
+              <Text fontSize="sm">From: {year}</Text>
+              <Text fontSize="sm">Genre: {genre}</Text>
+            </Box>
+            <IconButton
+              icon={isLiked ? <GoHeartFill /> : <GoHeart />}
+              aria-label={isLiked ? "Liked" : "Not liked"}
+              fontSize={24}
+              w="fit-content"
+              bg="none"
+              color="white"
+              _hover={{ bg: "none" }}
+              onClick={toggleLike}
+            />
+          </Flex>
         </Flex>
       </Box>
     </Box>

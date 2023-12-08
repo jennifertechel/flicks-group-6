@@ -1,5 +1,4 @@
-import { Box, Flex, Image, Text, Tooltip } from '@chakra-ui/react';
-
+import { Box, Flex, Image, Text, Tooltip } from "@chakra-ui/react";
 
 interface ThumbnailProps {
   image: string;
@@ -22,9 +21,9 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
       p="2"
       position="relative"
       transition="transform 0.3s"
-      _hover={{ transform: 'scale(1.05)' }}
+      _hover={{ transform: "scale(1.05)" }}
     >
-      <Image src={image} alt="Movie Thumbnail" />
+      <Image src={image} alt={title} />
       <Box
         bg="rgba(0, 0, 0, 0.7)"
         p="2"
@@ -36,7 +35,7 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
         bottom="0"
         opacity="0"
         transition="opacity 0.3s"
-        _hover={{ opacity: '1' }}
+        _hover={{ opacity: "1" }}
       >
         <Flex direction="column" alignItems="center">
           <Text fontSize="sm" fontWeight="bold">

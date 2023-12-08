@@ -35,7 +35,9 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
     setIsLiked(likedMovies.includes(title));
   }, [likedMovies, title]);
 
-  function toggleLike() {
+  function toggleLike(event: React.MouseEvent) {
+    event.stopPropagation();
+
     setIsLiked(!isLiked);
 
     if (!isLiked) {

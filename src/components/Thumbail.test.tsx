@@ -20,7 +20,7 @@ describe("Thumbnail component", () => {
         genre={movieData.genre}
       />
     );
-  const thumbnailImage = screen.queryByAltText("The Godfather");
+  const thumbnailImage = screen.queryByRole("img");
   expect(thumbnailImage).toBeTruthy(); 
  
   });

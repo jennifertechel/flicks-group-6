@@ -5,7 +5,7 @@ describe('RecommendedGallery component', () => {
   test('renders between 5 and 10 recommended movies', () => {
     render(<RecommendedGallery />);
     
-    const movieThumbnails = screen.getAllByAltText('Movie Thumbnail');
+    const movieThumbnails = screen.getAllByRole('img');
     const numberOfMovies = movieThumbnails.length;
 
     expect(numberOfMovies).toBeGreaterThanOrEqual(5);

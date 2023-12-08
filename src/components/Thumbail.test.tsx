@@ -20,9 +20,8 @@ describe("Thumbnail component", () => {
         genre={movieData.genre}
       />
     );
-  const thumbnailImage = screen.queryByAltText("The Godfather");
-  expect(thumbnailImage).toBeTruthy(); 
- 
+    const thumbnailImage = screen.queryByAltText("Test Movie");
+    expect(thumbnailImage).toBeInTheDocument();
   });
 
   test("toggles like button state", () => {

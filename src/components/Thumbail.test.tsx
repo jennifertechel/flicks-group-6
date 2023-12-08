@@ -40,10 +40,10 @@ describe("Thumbnail component", () => {
 
     fireEvent.click(likeButton);
 
-    expect(screen.getByLabelText("Liked")).toBeTruthy();
+    expect(screen.getByLabelText("Liked")).toBeInTheDocument();
 
     fireEvent.click(likeButton);
 
-    expect(screen.getByLabelText("Not liked")).toBeTruthy();
+    expect(screen.getByLabelText("Not liked")).toBeInTheDocument();
   });
 });

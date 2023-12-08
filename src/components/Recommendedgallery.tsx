@@ -17,7 +17,7 @@ function RecommendedGallery() {
   const moviesPerPage = 5;
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const trendingMovies = data.slice(0, 5);
+  const trendingMovies = data.slice(0, 10);
   
 
   const handleNext = () => {

@@ -1,7 +1,6 @@
 import { Box, Flex, IconButton } from '@chakra-ui/react';
 import { useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import data from '../../data/movies.json';
 import Thumbnail from './Thumbnail';
 
 interface Movie {
@@ -12,11 +11,15 @@ interface Movie {
   genre: string;
 }
 
-function Carousel() {
+interface CarouselProps {
+  movies: Movie[];
+}
+
+function Carousel({ movies }: CarouselProps) {
   const moviesPerPage = 5;
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const totalMovies = data.length;
+  const totalMovies = movies.length;
   const totalPages = Math.ceil(totalMovies / moviesPerPage);
 
   const handleNext = () => {
@@ -34,10 +37,10 @@ function Carousel() {
   const startSliceIndex = currentIndex * moviesPerPage;
   const endSliceIndex = startSliceIndex + moviesPerPage;
 
-  const moviesToDisplay = data.slice(startSliceIndex, endSliceIndex);
+  const moviesToDisplay = movies.slice(startSliceIndex, endSliceIndex);
 
   return (
-    <Flex justifyContent="center" alignItems="center"  >
+    <Flex justifyContent="center" alignItems="center" >
       <IconButton
         aria-label="Previous"
         icon={<FaChevronLeft />}

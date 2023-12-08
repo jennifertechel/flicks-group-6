@@ -1,4 +1,4 @@
-import { render, screen, waitFor, act } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { expect, test } from "vitest";
 import { userEvent } from "@testing-library/user-event";
 import "@testing-library/jest-dom";
@@ -10,7 +10,6 @@ import Home from "../pages/Home";
 import SearchResults from "../pages/SearchResult";
 import Categories from "../pages/Categories";
 import Favorites from "../pages/Favorites";
-import MovieDetails from "../pages/MovieDetails";
 
 // Default test to make sure that logo is rendered
 test("should render render logo", () => {

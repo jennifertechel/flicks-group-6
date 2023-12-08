@@ -49,6 +49,7 @@ function Carousel({ movies }: CarouselProps) {
         top="50%"
         zIndex="1"
         position="absolute"
+        isDisabled={movies.length <= moviesPerPage || currentIndex === 0}
       />
       <Flex
         maxWidth="100%"
@@ -83,7 +84,11 @@ function Carousel({ movies }: CarouselProps) {
         right="0"
         top="50%"
         zIndex="1"
-      />
+        isDisabled={
+          movies.length <= moviesPerPage ||
+          currentIndex === Math.ceil(movies.length / moviesPerPage) - 1
+        }
+          />
     </Flex>
   );
 }

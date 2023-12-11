@@ -43,7 +43,7 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
       setLikedMovies([...likedMovies, title]);
     } else {
       const updatedLikedMovies = likedMovies.filter(
-        (likedMovie: string | undefined) => likedMovie !== title
+        (likedMovie: string | undefined) => likedMovie !== title,
       );
       setLikedMovies(updatedLikedMovies);
     }
@@ -76,7 +76,6 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
         opacity="0"
         transition="opacity 0.3s"
         _hover={{ opacity: "1" }}
-        
       >
         <Flex direction="column">
           <Heading fontSize="xl" pb="2">

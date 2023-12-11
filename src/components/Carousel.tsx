@@ -40,19 +40,18 @@ function Carousel({ movies }: CarouselProps) {
   const moviesToDisplay = movies.slice(startSliceIndex, endSliceIndex);
 
   return (
-    <Flex justifyContent="center" alignItems="center" >
+    <Flex justifyContent="center" alignItems="center" width="100vw" >
       <IconButton
         aria-label="Previous"
         icon={<FaChevronLeft />}
         onClick={handlePrev}
         left="0"
-        top="50%"
         zIndex="1"
-        position="absolute"
+        position="relative"
         isDisabled={movies.length <= moviesPerPage || currentIndex === 0}
       />
       <Flex
-        maxWidth="100%"
+        
         css={{
           transition: 'transform 0.5s ease-in-out',
         }}
@@ -60,11 +59,10 @@ function Carousel({ movies }: CarouselProps) {
         {moviesToDisplay.map((movie: Movie) => (
           <Box
             key={movie.title}
-            display="inline-block"
             borderRadius="md"
-            minWidth="19vw"
-            marginRight="20px"
-            flexShrink={0}
+            margin="2rem"
+            justifyContent="center"
+            
           >
             <Thumbnail
               genre={movie.genre}
@@ -78,11 +76,11 @@ function Carousel({ movies }: CarouselProps) {
       </Flex>
       <IconButton
         aria-label="Next"
+        width="1vw"
         icon={<FaChevronRight />}
         onClick={handleNext}
-        position="absolute"
+        position="relative"
         right="0"
-        top="50%"
         zIndex="1"
         isDisabled={
           movies.length <= moviesPerPage ||

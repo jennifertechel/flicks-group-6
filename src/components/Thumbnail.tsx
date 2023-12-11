@@ -51,7 +51,7 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
 
   return (
     <Box
-      maxW="200px"
+      maxW="14vw"
       alignItems="flex-start"
       boxShadow="0 4px 8px 0 rgba(0, 0, 0, 0.2)"
       borderRadius="md"
@@ -76,6 +76,7 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
         opacity="0"
         transition="opacity 0.3s"
         _hover={{ opacity: "1" }}
+        
       >
         <Flex direction="column">
           <Heading fontSize="xl" pb="2">

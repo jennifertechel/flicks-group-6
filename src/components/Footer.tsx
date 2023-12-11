@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Footer() {
 	return (
-		<Flex py={30} px={10} direction={"column"}>
+		<Flex py={35} px={10} direction={"column"}>
 			<Flex
 				direction={{ base: "column", sm: "row" }}
 				justifyContent={"space-between"}

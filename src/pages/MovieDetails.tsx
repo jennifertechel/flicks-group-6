@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { useParams } from "react-router-dom";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { toggleLike, useLikeContext } from "../context/LikeContext";
 
 type Movie = {
   title: string;
@@ -25,33 +25,25 @@ type Movie = {
 };
 
 function MovieDetails({ movies }: { movies: Movie[] }) {
+  const { likedMovies, setLikedMovies } = useLikeContext();
   const { movieTitle } = useParams();
-  const [likedMovies, setLikedMovies] = useLocalStorage("likedMovies", []);
-  const [isLiked, setIsLiked] = useState(likedMovies.includes(movieTitle));
+  const [isLiked, setIsLiked] = useState(false);
 
-  const movie = movies.find(
-    (movie: { title: string | undefined }) => movie.title === movieTitle
-  );
+  const movie = movies.find((movie) => movie.title === movieTitle);
 
   if (!movie) {
     return <Text>The movie was not found</Text>;
   }
 
-  function toggleLike() {
-    const isAlreadyLiked = likedMovies.includes(movieTitle);
-
-    if (!isAlreadyLiked) {
-      setLikedMovies([...likedMovies, movieTitle]);
-      setIsLiked(true);
-    } else {
-      setLikedMovies(
-        likedMovies.filter(
-          (likedMovie: string | undefined) => likedMovie !== movieTitle
-        )
-      );
-      setIsLiked(false);
-    }
+  if (!movieTitle) {
+    throw new Error("Movie title is undefined or empty");
   }
+
+  const handleToggleLike = () => {
+    const title = movie.title || "";
+    setIsLiked(!isLiked);
+    toggleLike(likedMovies, setLikedMovies, title, isLiked, setIsLiked);
+  };
 
   return (
     <Center>
@@ -76,7 +68,9 @@ function MovieDetails({ movies }: { movies: Movie[] }) {
           </Text>
           <Text pb="4">{movie.synopsis}</Text>
           <IconButton
-            icon={isLiked ? <GoHeartFill /> : <GoHeart />}
+            icon={
+              likedMovies.includes(movie.title) ? <GoHeartFill /> : <GoHeart />
+            }
             data-testid="like-button"
             aria-label={isLiked ? "Liked" : "Not liked"}
             fontSize={24}
@@ -85,7 +79,7 @@ function MovieDetails({ movies }: { movies: Movie[] }) {
             color="white"
             ml="auto"
             _hover={{ bg: "none" }}
-            onClick={toggleLike}
+            onClick={handleToggleLike}
           />
         </Flex>
       </Flex>

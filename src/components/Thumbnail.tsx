@@ -23,17 +23,12 @@ interface ThumbnailProps {
 function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
   const [isLiked, setIsLiked] = useState(false);
   const [likedMovies, setLikedMovies] = useLocalStorage("likedMovies", []);
-  const navigate = useNavigate();
 
   const handleClick = () => {
     navigate(`/movies/${encodeURIComponent(title)}`);
   };
 
   const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate(`/movies/${encodeURIComponent(title)}`);
-  };
 
   useEffect(() => {
     setIsLiked(likedMovies.includes(title));

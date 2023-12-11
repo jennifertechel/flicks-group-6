@@ -4,9 +4,9 @@ import data from "../../data/movies.json";
 
 function Categories() {
   return (
-    <Flex flexDir='column'>
+    <Flex flexDir="column">
       <Heading>Categories</Heading>
-      <Flex flexDir='column'>
+      <Flex flexDir="column">
         {data.map((movie, index) => (
           <Box key={index}>
             <Text>{movie.title}</Text>

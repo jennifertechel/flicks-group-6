@@ -46,8 +46,8 @@ const router = createBrowserRouter(
         element={<MovieDetails movies={data} />}
       />
       <Route path="search-results/:term" element={<SearchResults />} />
-    </Route>
-  )
+    </Route>,
+  ),
 );
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
@@ -55,5 +55,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <ChakraProvider theme={theme}>
       <RouterProvider router={router} />
     </ChakraProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

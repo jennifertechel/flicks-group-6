@@ -30,7 +30,7 @@ function MovieDetails({ movies }: { movies: Movie[] }) {
   const [isLiked, setIsLiked] = useState(likedMovies.includes(movieTitle));
 
   const movie = movies.find(
-    (movie: { title: string | undefined }) => movie.title === movieTitle
+    (movie: { title: string | undefined }) => movie.title === movieTitle,
   );
 
   if (!movie) {
@@ -46,8 +46,8 @@ function MovieDetails({ movies }: { movies: Movie[] }) {
     } else {
       setLikedMovies(
         likedMovies.filter(
-          (likedMovie: string | undefined) => likedMovie !== movieTitle
-        )
+          (likedMovie: string | undefined) => likedMovie !== movieTitle,
+        ),
       );
       setIsLiked(false);
     }

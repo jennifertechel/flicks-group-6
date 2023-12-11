@@ -14,30 +14,30 @@ describe("Thumbnail component", () => {
   test("renders thumbnail image properly", () => {
     render(
       <MemoryRouter>
-      <Thumbnail
-        image={movieData.image}
-        rating={movieData.rating}
-        year={movieData.year}
-        title={movieData.title}
-        genre={movieData.genre}
-      />
-    </MemoryRouter>);
-  const thumbnailImage = screen.queryByRole("img");
-  expect(thumbnailImage).toBeTruthy(); 
- 
+        <Thumbnail
+          image={movieData.image}
+          rating={movieData.rating}
+          year={movieData.year}
+          title={movieData.title}
+          genre={movieData.genre}
+        />
+      </MemoryRouter>,
+    );
+    const thumbnailImage = screen.queryByRole("img");
+    expect(thumbnailImage).toBeTruthy();
   });
 
   test("toggles like button state", () => {
     render(
       <MemoryRouter>
-      <Thumbnail
-        image={movieData.image}
-        rating={movieData.rating}
-        year={movieData.year}
-        title={movieData.title}
-        genre={movieData.genre}
-      />
-      </MemoryRouter>
+        <Thumbnail
+          image={movieData.image}
+          rating={movieData.rating}
+          year={movieData.year}
+          title={movieData.title}
+          genre={movieData.genre}
+        />
+      </MemoryRouter>,
     );
 
     const likeButton = screen.getByLabelText("Not liked");

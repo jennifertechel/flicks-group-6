@@ -9,8 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
-import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useNavigate } from "react-router-dom";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 interface ThumbnailProps {
   image: string;
@@ -29,11 +29,19 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
     navigate(`/movies/${encodeURIComponent(title)}`);
   };
 
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/movies/${encodeURIComponent(title)}`);
+  };
+
   useEffect(() => {
     setIsLiked(likedMovies.includes(title));
   }, [likedMovies, title]);
 
-  function toggleLike() {
+  function toggleLike(event: React.MouseEvent) {
+    event.stopPropagation();
+
     setIsLiked(!isLiked);
 
     if (!isLiked) {
@@ -58,6 +66,7 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
       transition="transform 0.3s"
       _hover={{ transform: "scale(1.05)" }}
       onClick={handleClick}
+      cursor="pointer"
     >
       <Image src={image} alt={title} />
       <Box

@@ -9,8 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
-import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useNavigate } from "react-router-dom";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 interface ThumbnailProps {
   image: string;
@@ -22,14 +22,13 @@ interface ThumbnailProps {
 
 function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
   const [isLiked, setIsLiked] = useState(false);
-
   const [likedMovies, setLikedMovies] = useLocalStorage("likedMovies", []);
-
-  const navigate = useNavigate();
 
   const handleClick = () => {
     navigate(`/movies/${encodeURIComponent(title)}`);
   };
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLiked(likedMovies.includes(title));

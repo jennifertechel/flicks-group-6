@@ -22,14 +22,6 @@ function Footer() {
 					<Link to="/">Term of use</Link>
 				</Flex>
 			</Flex>
-
-			{/*
-      <Flex justifyContent={"center"}>
-				<Text>Copyright 2023</Text>
-				<Box>
-					<PiCopyrightThin />
-				</Box>
-			</Flex>*/}
 		</Flex>
 	);
 }

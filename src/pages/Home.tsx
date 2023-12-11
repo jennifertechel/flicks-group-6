@@ -1,12 +1,9 @@
-import { Flex } from "@chakra-ui/react";
-import TrendingCarousel from "../components/TrendingCarousel";
+import { Flex, Heading } from "@chakra-ui/react";
 
 function Home() {
   return (
     <Flex>
-      
-      <TrendingCarousel></TrendingCarousel>
-      
+      <Heading></Heading>
     </Flex>
   );
 }

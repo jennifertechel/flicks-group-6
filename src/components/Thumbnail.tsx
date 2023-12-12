@@ -6,6 +6,7 @@ import {
   Image,
   Text,
   Tooltip,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
@@ -24,6 +25,8 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
   const [isLiked, setIsLiked] = useState(false);
   const [likedMovies, setLikedMovies] = useLocalStorage("likedMovies", []);
   const [imageLoaded, setImageLoaded] = useState(true);
+  const [isSmallerThan500] = useMediaQuery("(max-width: 500px)");
+  const [isSmallerThan1000] = useMediaQuery("(max-width: 1000px)");
 
   const handleClick = () => {
     navigate(`/movies/${encodeURIComponent(title)}`);
@@ -89,7 +92,7 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
         p="2"
         color="white"
         position="absolute"
-        top="190"
+        top={imageLoaded ? (isSmallerThan1000 ? "0" : "50%") : "0%"}
         left="0"
         right="0"
         bottom="0"
@@ -98,22 +101,22 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
         _hover={{ opacity: "1" }}
       >
         <Flex direction="column">
-          <Heading fontSize="xl" pb="2">
+          <Heading fontSize={isSmallerThan500 ? "1vw" : "1.5vw"} >
             {title}
           </Heading>
           <Tooltip label={`Rating: ${rating}`} placement="top">
-            <Text fontSize="sm">{rating}</Text>
+            <Text fontSize="1vw">{rating}</Text>
           </Tooltip>
 
           <Flex direction="row" justify="space-between">
             <Box>
-              <Text fontSize="sm">From: {year}</Text>
-              <Text fontSize="sm">Genre: {genre}</Text>
+              <Text fontSize="1vw">From: {year}</Text>
+              <Text fontSize="1vw">Genre: {genre}</Text>
             </Box>
             <IconButton
               icon={isLiked ? <GoHeartFill /> : <GoHeart />}
               aria-label={isLiked ? "Liked" : "Not liked"}
-              fontSize={24}
+              fontSize={isSmallerThan500 ? "2.5vw" : "2vw"}
               w="fit-content"
               bg="none"
               color="white"

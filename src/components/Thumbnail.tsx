@@ -52,7 +52,7 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
   return (
     <Box
       maxW="14vw"
-      minW="10vw"
+      minW="12vw"
       alignItems="flex-start"
       boxShadow="0 4px 8px 0 rgba(0, 0, 0, 0.2)"
       borderRadius="md"

@@ -69,13 +69,13 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
       cursor="pointer"
       height={imageLoaded ? "auto" : "100%"}
     >
-      <Image 
-        src={image} 
-        alt={title} 
-        onError={() => setImageLoaded(false)} 
-        style={{ display: imageLoaded ? 'block' : 'none' }} 
+      <Image
+        src={image}
+        alt={title}
+        onError={() => setImageLoaded(false)}
+        style={{ display: imageLoaded ? "block" : "none" }}
       />
-       {!imageLoaded && ( 
+      {!imageLoaded && (
         <div
           style={{
             height: "100%",
@@ -101,7 +101,7 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
         _hover={{ opacity: "1" }}
       >
         <Flex direction="column">
-          <Heading fontSize={isSmallerThan500 ? "1vw" : "1.5vw"} >
+          <Heading fontSize={isSmallerThan500 ? "1vw" : "1.5vw"}>
             {title}
           </Heading>
           <Tooltip label={`Rating: ${rating}`} placement="top">

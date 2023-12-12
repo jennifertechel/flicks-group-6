@@ -43,7 +43,7 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
       setLikedMovies([...likedMovies, title]);
     } else {
       const updatedLikedMovies = likedMovies.filter(
-        (likedMovie: string | undefined) => likedMovie !== title
+        (likedMovie: string | undefined) => likedMovie !== title,
       );
       setLikedMovies(updatedLikedMovies);
     }

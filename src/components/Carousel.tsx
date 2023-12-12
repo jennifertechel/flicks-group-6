@@ -1,7 +1,7 @@
-import { Box, Flex, IconButton } from '@chakra-ui/react';
-import { useState } from 'react';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import Thumbnail from './Thumbnail';
+import { Box, Flex, IconButton } from "@chakra-ui/react";
+import { useState } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import Thumbnail from "./Thumbnail";
 
 interface Movie {
   title: string;
@@ -24,13 +24,13 @@ function Carousel({ movies }: CarouselProps) {
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === totalPages - 1 ? 0 : prevIndex + 1
+      prevIndex === totalPages - 1 ? 0 : prevIndex + 1,
     );
   };
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? totalPages - 1 : prevIndex - 1
+      prevIndex === 0 ? totalPages - 1 : prevIndex - 1,
     );
   };
 
@@ -40,7 +40,7 @@ function Carousel({ movies }: CarouselProps) {
   const moviesToDisplay = movies.slice(startSliceIndex, endSliceIndex);
 
   return (
-    <Flex justifyContent="center" alignItems="center" >
+    <Flex justifyContent="center" alignItems="center" width="100vw">
       <IconButton
         aria-label="Previous"
         icon={<FaChevronLeft />}
@@ -52,9 +52,8 @@ function Carousel({ movies }: CarouselProps) {
         isDisabled={movies.length <= moviesPerPage || currentIndex === 0}
       />
       <Flex
-        maxWidth="100%"
         css={{
-          transition: 'transform 0.5s ease-in-out',
+          transition: "transform 0.5s ease-in-out",
         }}
       >
         {moviesToDisplay.map((movie: Movie) => (
@@ -62,9 +61,8 @@ function Carousel({ movies }: CarouselProps) {
             key={movie.title}
             display="inline-block"
             borderRadius="md"
-            minWidth="19vw"
-            marginRight="20px"
-            flexShrink={0}
+            margin="2rem"
+            justifyContent="center"
           >
             <Thumbnail
               genre={movie.genre}
@@ -88,7 +86,7 @@ function Carousel({ movies }: CarouselProps) {
           movies.length <= moviesPerPage ||
           currentIndex === Math.ceil(movies.length / moviesPerPage) - 1
         }
-          />
+      />
     </Flex>
   );
 }

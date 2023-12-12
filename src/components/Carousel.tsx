@@ -46,9 +46,9 @@ function Carousel({ movies }: CarouselProps) {
         icon={<FaChevronLeft />}
         onClick={handlePrev}
         left="0"
-        
+        top="50%"
         zIndex="1"
-        position="relative"
+        position="absolute"
         isDisabled={movies.length <= moviesPerPage || currentIndex === 0}
       />
       <Flex
@@ -78,8 +78,9 @@ function Carousel({ movies }: CarouselProps) {
         aria-label="Next"
         icon={<FaChevronRight />}
         onClick={handleNext}
-        position="relative"
+        position="absolute"
         right="0"
+        top="50%"
         zIndex="1"
         isDisabled={
           movies.length <= moviesPerPage ||

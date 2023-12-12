@@ -46,8 +46,9 @@ function Carousel({ movies }: CarouselProps) {
         icon={<FaChevronLeft />}
         onClick={handlePrev}
         left="0"
+        top="50%"
         zIndex="1"
-        position="relative"
+        position="absolute"
         isDisabled={movies.length <= moviesPerPage || currentIndex === 0}
       />
       <Flex
@@ -58,6 +59,7 @@ function Carousel({ movies }: CarouselProps) {
         {moviesToDisplay.map((movie: Movie) => (
           <Box
             key={movie.title}
+            display="inline-block"
             borderRadius="md"
             margin="2rem"
             justifyContent="center"
@@ -74,11 +76,11 @@ function Carousel({ movies }: CarouselProps) {
       </Flex>
       <IconButton
         aria-label="Next"
-        width="1vw"
         icon={<FaChevronRight />}
         onClick={handleNext}
-        position="relative"
+        position="absolute"
         right="0"
+        top="50%"
         zIndex="1"
         isDisabled={
           movies.length <= moviesPerPage ||

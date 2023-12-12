@@ -30,20 +30,27 @@ function MovieDetails({ movies }: { movies: Movie[] }) {
   const [isLiked, setIsLiked] = useState(false);
 
   const movie = movies.find((movie) => movie.title === movieTitle);
-
   if (!movie) {
-    return <Text>The movie was not found</Text>;
+    return (
+      <Center m="12" as="b" fontSize="2xl">
+        <Text>The movie was not found</Text>;
+      </Center>
+    );
   }
 
   if (!movieTitle) {
     throw new Error("Movie title is undefined or empty");
   }
 
-  const handleToggleLike = () => {
+  function handleToggleLike() {
+    if (!movie) {
+      return <Text>The movie was not found</Text>;
+    }
+
     const title = movie.title || "";
     setIsLiked(!isLiked);
     toggleLike(likedMovies, setLikedMovies, title, isLiked, setIsLiked);
-  };
+  }
 
   return (
     <Center>

@@ -8,13 +8,13 @@ type LikeContextType = {
 
 const LikeContext = createContext<LikeContextType | undefined>(undefined);
 
-export const toggleLike = (
+export function toggleLike(
   likedMovies: string[],
   setLikedMovies: React.Dispatch<React.SetStateAction<string[]>>,
   title: string,
   isLiked: boolean,
   setIsLiked: React.Dispatch<React.SetStateAction<boolean>>
-) => {
+) {
   const isAlreadyLiked = likedMovies.includes(title);
 
   if (!isAlreadyLiked) {
@@ -27,15 +27,15 @@ export const toggleLike = (
     setLikedMovies(updatedLikedMovies);
     setIsLiked(false);
   }
-};
+}
 
-export const useLikeContext = () => {
+export function useLikeContext() {
   const context = useContext(LikeContext);
   if (!context) {
     throw new Error("useLikeContext must be used within a LikeContextProvider");
   }
   return context;
-};
+}
 
 export const LikeContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,

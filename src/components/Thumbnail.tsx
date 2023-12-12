@@ -25,9 +25,9 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
   const [isLiked, setIsLiked] = useState(false);
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  function handleClick() {
     navigate(`/movies/${encodeURIComponent(title)}`);
-  };
+  }
 
   function handleToggleLike(event: React.MouseEvent) {
     event.stopPropagation();

@@ -23,6 +23,7 @@ interface ThumbnailProps {
 function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
   const [isLiked, setIsLiked] = useState(false);
   const [likedMovies, setLikedMovies] = useLocalStorage("likedMovies", []);
+  const [imageLoaded, setImageLoaded] = useState(true);
 
   const handleClick = () => {
     navigate(`/movies/${encodeURIComponent(title)}`);
@@ -63,8 +64,26 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
       _hover={{ transform: "scale(1.05)" }}
       onClick={handleClick}
       cursor="pointer"
+      height={imageLoaded ? "auto" : "100%"}
     >
-      <Image src={image} alt={title} />
+      <Image 
+        src={image} 
+        alt={title} 
+        onError={() => setImageLoaded(false)} 
+        style={{ display: imageLoaded ? 'block' : 'none' }} 
+      />
+       {!imageLoaded && ( 
+        <div
+          style={{
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <span>{title}</span>
+        </div>
+      )}
       <Box
         bg="rgba(0, 0, 0, 0.7)"
         p="2"

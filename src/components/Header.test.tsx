@@ -16,7 +16,7 @@ test("should render render logo", () => {
   render(
     <MemoryRouter>
       <Header />
-    </MemoryRouter>,
+    </MemoryRouter>
   );
   const logo = screen.getByText("Flicks");
   expect(logo).toBeInTheDocument();
@@ -32,7 +32,7 @@ test("rendering test", async () => {
 
         <Route path="search-results/:term" element={<SearchResults />} />
       </Routes>
-    </BrowserRouter>,
+    </BrowserRouter>
   );
 
   await waitFor(() => {
@@ -45,7 +45,7 @@ test("display search field after click", async () => {
   render(
     <MemoryRouter>
       <Header />
-    </MemoryRouter>,
+    </MemoryRouter>
   );
   const user = userEvent.setup();
   const iconButton = screen.getByLabelText("Search");
@@ -67,7 +67,7 @@ test("get rerouted when typing in input", async () => {
           <Route path="search-results/:term" element={<SearchResults />} />
         </Route>
       </Routes>
-    </BrowserRouter>,
+    </BrowserRouter>
   );
 
   const user = userEvent.setup();
@@ -81,7 +81,7 @@ test("get rerouted when typing in input", async () => {
   await user.type(searchField, "hello");
 
   const searchResultsHeading = await waitFor(() =>
-    screen.queryByText('Search Results for "hello"'),
+    screen.queryByText('Search Results for "hello"')
   );
   expect(searchResultsHeading).toBeInTheDocument();
 });
@@ -95,7 +95,7 @@ test("display error when movie doesn't exist", async () => {
           <Route path="search-results/:term" element={<SearchResults />} />
         </Route>
       </Routes>
-    </BrowserRouter>,
+    </BrowserRouter>
   );
 
   const user = userEvent.setup();
@@ -121,7 +121,7 @@ test("display thumbnail after search", async () => {
           <Route path="search-results/:term" element={<SearchResults />} />
         </Route>
       </Routes>
-    </BrowserRouter>,
+    </BrowserRouter>
   );
 
   const user = userEvent.setup();
@@ -135,7 +135,7 @@ test("display thumbnail after search", async () => {
   await user.type(searchField, "godfather");
 
   const movieTitle = await waitFor(() =>
-    screen.queryByAltText("The Godfather"),
+    screen.queryByAltText("The Godfather")
   );
   expect(movieTitle).toBeInTheDocument();
 });

@@ -6,7 +6,7 @@ function Favorites() {
   const [likedMovies] = useLocalStorage("likedMovies", []);
 
   const favoriteMovies = data.filter((movie) =>
-    likedMovies.includes(movie.title),
+    likedMovies.includes(movie.title)
   );
 
   return (

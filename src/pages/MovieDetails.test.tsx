@@ -25,14 +25,14 @@ describe("MovieDetails", () => {
             element={<MovieDetails movies={movies} />}
           />
         </Routes>
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     expect(screen.getByText("Inception")).toBeTruthy();
     expect(screen.getByText("From 2010")).toBeTruthy();
     expect(screen.getByText("PG-13")).toBeTruthy();
     expect(
-      screen.getByText("Actors: Leonardo DiCaprio, Ellen Page"),
+      screen.getByText("Actors: Leonardo DiCaprio, Ellen Page")
     ).toBeTruthy();
     expect(screen.getByText("Genre: Sci-Fi")).toBeTruthy();
     expect(screen.getByText("A mind-bending thriller.")).toBeTruthy();
@@ -47,7 +47,7 @@ describe("MovieDetails", () => {
             element={<MovieDetails movies={movies} />}
           />
         </Routes>
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     expect(screen.getByText("The movie was not found")).toBeTruthy();
@@ -62,7 +62,7 @@ describe("MovieDetails", () => {
             element={<MovieDetails movies={movies} />}
           />
         </Routes>
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     const likeButton = screen.getByLabelText("Not liked");

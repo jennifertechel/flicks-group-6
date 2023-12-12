@@ -15,7 +15,7 @@ function SearchResults() {
   const { term } = useParams<{ term: string }>();
 
   const filteredMovies = data.filter((movie: Movie) =>
-    movie.title.toLowerCase().includes(term!.toLowerCase()),
+    movie.title.toLowerCase().includes(term!.toLowerCase())
   );
 
   return (

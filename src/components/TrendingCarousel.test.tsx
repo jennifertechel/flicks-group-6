@@ -1,25 +1,24 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import TrendingCarousel from "./TrendingCarousel";
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import TrendingCarousel from './TrendingCarousel';
 
-describe("TrendingCarousel", () => {
-  test("displays trending movies", async () => {
+describe('TrendingCarousel', () => {
+  test('displays trending movies', async () => { 
     render(
       <MemoryRouter>
         <TrendingCarousel />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
-    const prevButton = screen.getByLabelText("Previous");
-    const nextButton = screen.getByLabelText("Next");
+    const prevButton = screen.getByLabelText('Previous');
+    const nextButton = screen.getByLabelText('Next');
 
     fireEvent.click(nextButton);
     fireEvent.click(prevButton);
 
+    
     await waitFor(() =>
-      expect(
-        screen.getByText("Indiana Jones and the Raiders of the Lost Ark"),
-      ).toBeInTheDocument(),
+      expect(screen.getByText('Indiana Jones and the Raiders of the Lost Ark')).toBeInTheDocument()
     );
   });
 });

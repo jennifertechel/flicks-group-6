@@ -46,7 +46,6 @@ function Carousel({ movies }: CarouselProps) {
         icon={<FaChevronLeft />}
         onClick={handlePrev}
         left="0"
-        
         zIndex="1"
         position="relative"
         isDisabled={movies.length <= moviesPerPage || currentIndex === 0}
@@ -61,7 +60,7 @@ function Carousel({ movies }: CarouselProps) {
             key={movie.title}
             display="inline-block"
             borderRadius="md"
-            margin="2rem"
+            margin="1vw"
             justifyContent="center"
           >
             <Thumbnail

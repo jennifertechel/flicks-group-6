@@ -1,22 +1,22 @@
 import {
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerOverlay,
   Flex,
   Heading,
-  IconButton,
   Input,
-  InputGroup,
-  InputRightElement,
+  IconButton,
   useDisclosure,
+  Drawer,
+  DrawerOverlay,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerBody,
+  InputRightElement,
+  InputGroup,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import { FiSearch } from "react-icons/fi";
-import { IoClose } from "react-icons/io5";
-import { RxHamburgerMenu } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
+import { FiSearch } from "react-icons/fi";
+import { useState } from "react";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { IoClose } from "react-icons/io5";
 
 function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);

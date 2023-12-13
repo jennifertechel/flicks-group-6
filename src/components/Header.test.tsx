@@ -1,15 +1,16 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import { expect, test } from "vitest";
-import { userEvent } from "@testing-library/user-event";
 import "@testing-library/jest-dom";
+import { render, screen, waitFor } from "@testing-library/react";
+import { userEvent } from "@testing-library/user-event";
 import { BrowserRouter, MemoryRouter, Route, Routes } from "react-router-dom"; // Import MemoryRouter
+import { expect, test } from "vitest";
 
-import Header from "./Header";
 import App from "../App";
-import Home from "../pages/Home";
-import SearchResults from "../pages/SearchResult";
+import { LikeContextProvider } from "../hooks/useLikeContext";
 import Categories from "../pages/Categories";
 import Favorites from "../pages/Favorites";
+import Home from "../pages/Home";
+import SearchResults from "../pages/SearchResult";
+import Header from "./Header";
 
 test("should render render logo", () => {
   render(
@@ -19,6 +20,27 @@ test("should render render logo", () => {
   );
   const logo = screen.getByText("Flicks");
   expect(logo).toBeInTheDocument();
+});
+
+test("rendering test", async () => {
+  render(
+    <BrowserRouter>
+      <LikeContextProvider>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="categories" element={<Categories />} />
+          <Route path="favorites" element={<Favorites />} />
+
+          <Route path="search-results/:term" element={<SearchResults />} />
+        </Routes>
+      </LikeContextProvider>
+    </BrowserRouter>
+  );
+
+  await waitFor(() => {
+    const h1 = screen.queryByText("Home");
+    expect(h1).toBeInTheDocument();
+  });
 });
 
 test("display search field after click", async () => {

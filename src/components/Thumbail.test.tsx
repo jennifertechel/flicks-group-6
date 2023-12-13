@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { LikeContextProvider } from "../hooks/useLikeContext";
 import Thumbnail from "./Thumbnail";
 
 describe("Thumbnail component", () => {
@@ -14,29 +15,33 @@ describe("Thumbnail component", () => {
   test("renders thumbnail image properly", () => {
     render(
       <MemoryRouter>
-      <Thumbnail
-        image={movieData.image}
-        rating={movieData.rating}
-        year={movieData.year}
-        title={movieData.title}
-        genre={movieData.genre}
-      />
-    </MemoryRouter>);
-  const thumbnailImage = screen.queryByRole("img");
-  expect(thumbnailImage).toBeTruthy(); 
- 
+        <LikeContextProvider>
+          <Thumbnail
+            image={movieData.image}
+            rating={movieData.rating}
+            year={movieData.year}
+            title={movieData.title}
+            genre={movieData.genre}
+          />
+        </LikeContextProvider>
+      </MemoryRouter>
+    );
+    const thumbnailImage = screen.queryByRole("img");
+    expect(thumbnailImage).toBeTruthy();
   });
 
   test("toggles like button state", () => {
     render(
       <MemoryRouter>
-      <Thumbnail
-        image={movieData.image}
-        rating={movieData.rating}
-        year={movieData.year}
-        title={movieData.title}
-        genre={movieData.genre}
-      />
+        <LikeContextProvider>
+          <Thumbnail
+            image={movieData.image}
+            rating={movieData.rating}
+            year={movieData.year}
+            title={movieData.title}
+            genre={movieData.genre}
+          />
+        </LikeContextProvider>
       </MemoryRouter>
     );
 

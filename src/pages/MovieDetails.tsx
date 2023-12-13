@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { useParams } from "react-router-dom";
-import { toggleLike, useLikeContext } from "../context/LikeContext";
+import { useLikeContext, usetoggleLike } from "../hooks/useLikeContext";
 
 type Movie = {
   title: string;
@@ -28,8 +28,8 @@ function MovieDetails({ movies }: { movies: Movie[] }) {
   const { likedMovies, setLikedMovies } = useLikeContext();
   const { movieTitle } = useParams();
   const [isLiked, setIsLiked] = useState(false);
-
   const movie = movies.find((movie) => movie.title === movieTitle);
+
   if (!movie) {
     return (
       <Center m="12" as="b" fontSize="2xl">
@@ -49,7 +49,7 @@ function MovieDetails({ movies }: { movies: Movie[] }) {
 
     const title = movie.title || "";
     setIsLiked(!isLiked);
-    toggleLike(likedMovies, setLikedMovies, title, isLiked, setIsLiked);
+    usetoggleLike(likedMovies, setLikedMovies, title, isLiked, setIsLiked);
   }
 
   return (

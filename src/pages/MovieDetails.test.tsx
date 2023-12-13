@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { describe, expect } from "vitest";
-import { LikeContextProvider } from "../context/LikeContext";
+import { LikeContextProvider } from "../hooks/useLikeContext";
 import MovieDetails from "./MovieDetails";
 
 describe("MovieDetails", () => {

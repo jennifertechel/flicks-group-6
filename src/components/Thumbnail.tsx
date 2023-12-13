@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
-import { toggleLike, useLikeContext } from "../context/LikeContext";
+import { useLikeContext, usetoggleLike } from "../hooks/useLikeContext";
 
 interface ThumbnailProps {
   image: string;
@@ -32,7 +32,7 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
   function handleToggleLike(event: React.MouseEvent) {
     event.stopPropagation();
     setIsLiked(!isLiked);
-    toggleLike(likedMovies, setLikedMovies, title, isLiked, setIsLiked);
+    usetoggleLike(likedMovies, setLikedMovies, title, isLiked, setIsLiked);
   }
 
   return (

@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { LikeContextProvider } from "../context/LikeContext";
+import { LikeContextProvider } from "../hooks/useLikeContext";
 import TrendingCarousel from "./TrendingCarousel";
 
 describe("TrendingCarousel", () => {

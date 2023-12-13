@@ -1,7 +1,7 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import data from "../../data/movies.json";
-import { LikeContextProvider } from "../context/LikeContext";
+import { LikeContextProvider } from "../hooks/useLikeContext";
 import Carousel from "./Carousel";
 
 const Movies = data.slice(0, 30);

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import { LikeContextProvider } from "./context/LikeContext";
+import { LikeContextProvider } from "./hooks/useLikeContext";
 
 function App() {
   return (

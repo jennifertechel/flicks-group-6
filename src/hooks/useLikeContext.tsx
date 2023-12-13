@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useLocalStorage } from "./useLocalStorage";
 
 type LikeContextType = {
   likedMovies: string[];
@@ -8,7 +8,7 @@ type LikeContextType = {
 
 const LikeContext = createContext<LikeContextType | undefined>(undefined);
 
-export function toggleLike(
+function usetoggleLike(
   likedMovies: string[],
   setLikedMovies: React.Dispatch<React.SetStateAction<string[]>>,
   title: string,
@@ -21,25 +21,27 @@ export function toggleLike(
     setLikedMovies([...likedMovies, title]);
     setIsLiked(true);
   } else {
-    const updatedLikedMovies = likedMovies.filter(
-      (likedMovie: string) => likedMovie !== title
-    );
+    const updatedLikedMovies = likedMovies.filter(function (
+      likedMovie: string
+    ) {
+      return likedMovie !== title;
+    });
     setLikedMovies(updatedLikedMovies);
     setIsLiked(false);
   }
 }
 
-export function useLikeContext() {
+function useLikeContext() {
   const context = useContext(LikeContext);
   if (!context) {
-    throw new Error("useLikeContext must be used within a LikeContextProvider");
+    throw new Error("Something went wrong");
   }
   return context;
 }
 
-export const LikeContextProvider: React.FC<{ children: React.ReactNode }> = ({
+const LikeContextProvider: React.FC<{ children: React.ReactNode }> = function ({
   children,
-}) => {
+}) {
   const [likedMovies, setLikedMovies] = useLocalStorage("likedMovies", []);
 
   return (
@@ -48,3 +50,5 @@ export const LikeContextProvider: React.FC<{ children: React.ReactNode }> = ({
     </LikeContext.Provider>
   );
 };
+
+export { usetoggleLike, useLikeContext, LikeContextProvider };

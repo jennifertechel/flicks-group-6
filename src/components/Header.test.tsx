@@ -5,7 +5,7 @@ import { BrowserRouter, MemoryRouter, Route, Routes } from "react-router-dom"; /
 import { expect, test } from "vitest";
 
 import App from "../App";
-import { LikeContextProvider } from "../context/LikeContext";
+import { LikeContextProvider } from "../hooks/useLikeContext";
 import Categories from "../pages/Categories";
 import Favorites from "../pages/Favorites";
 import Home from "../pages/Home";

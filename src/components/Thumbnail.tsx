@@ -8,9 +8,10 @@ import {
   Tooltip,
   useMediaQuery,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
+import { usetoggleLike } from "../hooks/useLikeContext";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 interface ThumbnailProps {
@@ -22,6 +23,7 @@ interface ThumbnailProps {
 }
 
 function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
+  
   const [isLiked, setIsLiked] = useState(false);
   const [likedMovies, setLikedMovies] = useLocalStorage("likedMovies", []);
   const [imageLoaded, setImageLoaded] = useState(true);
@@ -35,23 +37,11 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setIsLiked(likedMovies.includes(title));
-  }, [likedMovies, title]);
 
-  function toggleLike(event: React.MouseEvent) {
+  function handleToggleLike(event: React.MouseEvent) {
     event.stopPropagation();
-
     setIsLiked(!isLiked);
-
-    if (!isLiked) {
-      setLikedMovies([...likedMovies, title]);
-    } else {
-      const updatedLikedMovies = likedMovies.filter(
-        (likedMovie: string | undefined) => likedMovie !== title,
-      );
-      setLikedMovies(updatedLikedMovies);
-    }
+    usetoggleLike(likedMovies, setLikedMovies, title, isLiked, setIsLiked);
   }
 
   return (
@@ -118,14 +108,14 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
               <Text fontSize="1vw">Genre: {genre}</Text>
             </Box>
             <IconButton
-              icon={isLiked ? <GoHeartFill /> : <GoHeart />}
+              icon={likedMovies.includes(title) ? <GoHeartFill /> : <GoHeart />}
               aria-label={isLiked ? "Liked" : "Not liked"}
               fontSize={isSmallerThan500 ? "2.5vw" : "2vw"}
               w="fit-content"
               bg="none"
               color="white"
               _hover={{ bg: "none" }}
-              onClick={toggleLike}
+              onClick={handleToggleLike}
             />
           </Flex>
         </Flex>

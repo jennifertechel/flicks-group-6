@@ -23,7 +23,6 @@ interface ThumbnailProps {
 }
 
 function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
-  
   const [isLiked, setIsLiked] = useState(false);
   const [likedMovies, setLikedMovies] = useLocalStorage("likedMovies", []);
   const [imageLoaded, setImageLoaded] = useState(true);

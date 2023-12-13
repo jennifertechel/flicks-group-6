@@ -27,7 +27,8 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
   const [imageLoaded, setImageLoaded] = useState(true);
   const [isSmallerThan500] = useMediaQuery("(max-width: 500px)");
   const [isSmallerThan1000] = useMediaQuery("(max-width: 1000px)");
-
+  const [showOverlay, setShowOverlay] = useState(false);
+  
   const handleClick = () => {
     navigate(`/movies/${encodeURIComponent(title)}`);
   };
@@ -64,10 +65,12 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
       bg="white"
       position="relative"
       transition="transform 0.3s"
-      _hover={{ transform: "scale(1.05)" }}
+      _hover={{transform: "scale(1.05)"}}
       onClick={handleClick}
       cursor="pointer"
       height={imageLoaded ? "auto" : "100%"}
+      onMouseEnter={() => setShowOverlay(true)} 
+      onMouseLeave={() => setShowOverlay(false)}
     >
       <Image
         src={image}
@@ -96,9 +99,10 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
         left="0"
         right="0"
         bottom="0"
-        opacity="0"
+        opacity={showOverlay ? "1" : "0"}
         transition="opacity 0.3s"
         _hover={{ opacity: "1" }}
+        
       >
         <Flex direction="column">
           <Heading fontSize={isSmallerThan500 ? "1vw" : "1.5vw"}>

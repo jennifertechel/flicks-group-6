@@ -1,4 +1,4 @@
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 function Hero() {
@@ -12,8 +12,12 @@ function Hero() {
 			bgSize="cover"
 			bgPos="center"
 		>
-			<Box>
-				<Heading>Welcome! Flicks</Heading>
+			<Box pl={{ base: "4", md: "10" }}>
+				<Heading fontSize={{ base: "30", md: "52" }}>Welcome to Flicks</Heading>
+				<Text mb={6} fontSize={{ base: "18", md: "22" }}>
+					Explore a variety of categories and <br />
+					find your favorite movies.
+				</Text>
 				<Link to="/categories">View more</Link>
 			</Box>
 		</Flex>

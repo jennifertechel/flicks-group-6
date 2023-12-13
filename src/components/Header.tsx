@@ -48,12 +48,7 @@ function Header() {
   };
 
   return (
-    <Flex
-      px={{ base: 5, lg: 20 }}
-      py={3}
-      justify="space-between"
-      align="center"
-    >
+    <Flex px={35} py={3} justify="space-between" align="center">
       <Heading fontSize={{ base: 68, md: 72 }}>
         <Link to="/">Flicks</Link>
       </Heading>

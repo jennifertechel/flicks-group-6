@@ -12,7 +12,6 @@ import Home from "../pages/Home";
 import SearchResults from "../pages/SearchResult";
 import Header from "./Header";
 
-// Default test to make sure that logo is rendered
 test("should render render logo", () => {
   render(
     <MemoryRouter>

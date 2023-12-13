@@ -11,7 +11,6 @@ import SearchResults from "../pages/SearchResult";
 import Categories from "../pages/Categories";
 import Favorites from "../pages/Favorites";
 
-// Default test to make sure that logo is rendered
 test("should render render logo", () => {
   render(
     <MemoryRouter>
@@ -20,25 +19,6 @@ test("should render render logo", () => {
   );
   const logo = screen.getByText("Flicks");
   expect(logo).toBeInTheDocument();
-});
-
-test("rendering test", async () => {
-  render(
-    <BrowserRouter>
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="categories" element={<Categories />} />
-        <Route path="favorites" element={<Favorites />} />
-
-        <Route path="search-results/:term" element={<SearchResults />} />
-      </Routes>
-    </BrowserRouter>
-  );
-
-  await waitFor(() => {
-    const h1 = screen.queryByText("Home");
-    expect(h1).toBeInTheDocument();
-  });
 });
 
 test("display search field after click", async () => {

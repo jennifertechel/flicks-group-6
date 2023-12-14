@@ -40,7 +40,7 @@ function Carousel({ movies }: CarouselProps) {
   const moviesToDisplay = movies.slice(startSliceIndex, endSliceIndex);
 
   return (
-    <Flex justifyContent="center" alignItems="center" width="100vw">
+    <Flex justifyContent="center" alignItems="center" maxWidth="100vw">
       <IconButton
         aria-label="Previous"
         icon={<FaChevronLeft />}

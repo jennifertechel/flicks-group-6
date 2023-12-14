@@ -1,12 +1,11 @@
 import {
+  Badge,
   Box,
   Flex,
   Heading,
   IconButton,
   Image,
   Text,
-  Tooltip,
-  useMediaQuery,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
@@ -24,16 +23,12 @@ interface ThumbnailProps {
 function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
   const { likedMovies, setLikedMovies } = useLikeContext();
   const [isLiked, setIsLiked] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(true);
-  const [isSmallerThan500] = useMediaQuery("(max-width: 500px)");
-  const [isSmallerThan1000] = useMediaQuery("(max-width: 1000px)");
   const [showOverlay, setShowOverlay] = useState(false);
+  const navigate = useNavigate();
 
   const handleClick = () => {
     navigate(`/movies/${encodeURIComponent(title)}`);
   };
-
-  const navigate = useNavigate();
 
   function handleToggleLike(event: React.MouseEvent) {
     event.stopPropagation();
@@ -43,70 +38,42 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
 
   return (
     <Box
-      maxW="16vw"
-      minW="11vw"
+      width="16rem"
       alignItems="flex-start"
       boxShadow="0 4px 8px 0 rgba(0, 0, 0, 0.2)"
-      borderRadius="md"
+      borderRadius="10px"
       overflow="hidden"
       bg="white"
       position="relative"
       transition="transform 0.3s"
-      _hover={{ transform: "scale(1.05)" }}
+      _hover={{ transform: "scale(1.08)" }}
       onClick={handleClick}
       cursor="pointer"
-      height={imageLoaded ? "auto" : "100%"}
+      height="auto"
       onMouseEnter={() => setShowOverlay(true)}
       onMouseLeave={() => setShowOverlay(false)}
     >
-      <Image
-        src={image}
-        alt={title}
-        onError={() => setImageLoaded(false)}
-        style={{ display: imageLoaded ? "block" : "none" }}
-      />
-      {!imageLoaded && (
-        <div
-          style={{
-            height: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <span>{title}</span>
-        </div>
-      )}
+      <Image src={image} alt={title} />
+
       <Box
-        bg="rgba(0, 0, 0, 0.7)"
-        p="2"
+        bg="rgba(0, 0, 0, 0.9)"
+        p={2}
         color="white"
         position="absolute"
-        top={imageLoaded ? (isSmallerThan1000 ? "0" : "50%") : "0%"}
+        top="50%"
         left="0"
         right="0"
         bottom="0"
         opacity={showOverlay ? "1" : "0"}
         transition="opacity 0.3s"
-        _hover={{ opacity: "1" }}
       >
         <Flex direction="column">
-          <Heading fontSize={isSmallerThan500 ? "1vw" : "1.5vw"}>
-            {title}
-          </Heading>
-          <Tooltip label={`Rating: ${rating}`} placement="top">
-            <Text fontSize="1vw">{rating}</Text>
-          </Tooltip>
-
-          <Flex direction="row" justify="space-between">
-            <Box>
-              <Text fontSize="1vw">From: {year}</Text>
-              <Text fontSize="1vw">Genre: {genre}</Text>
-            </Box>
+          <Flex justify="space-between" align="center">
+            <Heading fontSize={20}>{title}</Heading>
             <IconButton
               icon={likedMovies.includes(title) ? <GoHeartFill /> : <GoHeart />}
               aria-label={isLiked ? "Liked" : "Not liked"}
-              fontSize={isSmallerThan500 ? "2.5vw" : "2vw"}
+              fontSize="1.5rem"
               w="fit-content"
               bg="none"
               color="white"
@@ -114,6 +81,15 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
               onClick={handleToggleLike}
             />
           </Flex>
+          <Flex gap={5} align="center" pb={2}>
+            <Text>Rating:</Text>
+            <Badge px={3} borderRadius="xl">
+              {rating}
+            </Badge>
+          </Flex>
+
+          <Text fontSize={16}>From: {year}</Text>
+          <Text fontSize={16}>Genre: {genre}</Text>
         </Flex>
       </Box>
     </Box>

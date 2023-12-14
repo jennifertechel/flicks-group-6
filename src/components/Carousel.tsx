@@ -1,7 +1,11 @@
-import { Box, Flex, IconButton } from "@chakra-ui/react";
-import { useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { Box } from "@chakra-ui/react";
 import Thumbnail from "./Thumbnail";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 
 interface Movie {
   title: string;
@@ -16,53 +20,27 @@ interface CarouselProps {
 }
 
 function Carousel({ movies }: CarouselProps) {
-  const moviesPerPage = 5;
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const totalMovies = movies.length;
-  const totalPages = Math.ceil(totalMovies / moviesPerPage);
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === totalPages - 1 ? 0 : prevIndex + 1,
-    );
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? totalPages - 1 : prevIndex - 1,
-    );
-  };
-
-  const startSliceIndex = currentIndex * moviesPerPage;
-  const endSliceIndex = startSliceIndex + moviesPerPage;
-
-  const moviesToDisplay = movies.slice(startSliceIndex, endSliceIndex);
-
   return (
-    <Flex justifyContent="center" alignItems="center" width="100vw">
-      <IconButton
-        aria-label="Previous"
-        icon={<FaChevronLeft />}
-        onClick={handlePrev}
-        left="0"
-        zIndex="1"
-        position="relative"
-        isDisabled={movies.length <= moviesPerPage || currentIndex === 0}
-      />
-      <Flex
-        css={{
-          transition: "transform 0.5s ease-in-out",
+    <Box maxW="100vw">
+      <Swiper
+        modules={[Navigation]}
+        spaceBetween={20}
+        slidesPerView={2}
+        navigation
+        breakpoints={{
+          640: {
+            slidesPerView: 3,
+          },
+          768: {
+            slidesPerView: 4,
+          },
+          1024: {
+            slidesPerView: 5,
+          },
         }}
       >
-        {moviesToDisplay.map((movie: Movie) => (
-          <Box
-            key={movie.title}
-            display="inline-block"
-            borderRadius="md"
-            margin="1vw"
-            justifyContent="center"
-          >
+        {movies.map((movie: Movie, index: number) => (
+          <SwiperSlide key={index}>
             <Thumbnail
               genre={movie.genre}
               title={movie.title}
@@ -70,22 +48,10 @@ function Carousel({ movies }: CarouselProps) {
               rating={movie.rating}
               year={movie.year}
             />
-          </Box>
+          </SwiperSlide>
         ))}
-      </Flex>
-      <IconButton
-        aria-label="Next"
-        icon={<FaChevronRight />}
-        onClick={handleNext}
-        position="relative"
-        right="0"
-        zIndex="1"
-        isDisabled={
-          movies.length <= moviesPerPage ||
-          currentIndex === Math.ceil(movies.length / moviesPerPage) - 1
-        }
-      />
-    </Flex>
+      </Swiper>
+    </Box>
   );
 }
 

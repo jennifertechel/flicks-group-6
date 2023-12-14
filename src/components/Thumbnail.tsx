@@ -38,7 +38,7 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
 
   return (
     <Box
-      width="16rem"
+      width="14rem"
       alignItems="flex-start"
       boxShadow="0 4px 8px 0 rgba(0, 0, 0, 0.2)"
       borderRadius="10px"

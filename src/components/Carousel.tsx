@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import Thumbnail from "./Thumbnail";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -21,21 +21,32 @@ interface CarouselProps {
 
 function Carousel({ movies }: CarouselProps) {
   return (
-    <Box maxW="100vw">
+    <Flex w="100%" justifyContent="center" alignItems="center">
       <Swiper
         modules={[Navigation]}
         spaceBetween={20}
-        slidesPerView={2}
+        slidesPerView={1}
         navigation
         breakpoints={{
-          640: {
-            slidesPerView: 3,
+          480: {
+            slidesPerView: 2,
+            spaceBetween: 20,
           },
           768: {
-            slidesPerView: 4,
+            slidesPerView: 3,
+            spaceBetween: 30,
           },
-          1024: {
+          992: {
+            slidesPerView: 3,
+            spaceBetween: 40,
+          },
+          1280: {
             slidesPerView: 5,
+            spaceBetween: 40,
+          },
+          1536: {
+            slidesPerView: 6,
+            spaceBetween: 50,
           },
         }}
       >
@@ -51,7 +62,7 @@ function Carousel({ movies }: CarouselProps) {
           </SwiperSlide>
         ))}
       </Swiper>
-    </Box>
+    </Flex>
   );
 }
 

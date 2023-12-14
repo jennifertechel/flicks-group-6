@@ -2,6 +2,7 @@ import "@testing-library/jest-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { describe, expect } from "vitest";
+import { LikeContextProvider } from "../hooks/useLikeContext";
 import MovieDetails from "./MovieDetails";
 
 describe("MovieDetails", () => {
@@ -19,12 +20,14 @@ describe("MovieDetails", () => {
   test("renders movie details correctly", () => {
     render(
       <MemoryRouter initialEntries={["/movies/Inception"]}>
-        <Routes>
-          <Route
-            path="/movies/:movieTitle"
-            element={<MovieDetails movies={movies} />}
-          />
-        </Routes>
+        <LikeContextProvider>
+          <Routes>
+            <Route
+              path="/movies/:movieTitle"
+              element={<MovieDetails movies={movies} />}
+            />
+          </Routes>
+        </LikeContextProvider>
       </MemoryRouter>
     );
 
@@ -41,12 +44,14 @@ describe("MovieDetails", () => {
   test('displays "Movie not found" for missing movie', () => {
     render(
       <MemoryRouter initialEntries={["/movies/NonExistingMovie"]}>
-        <Routes>
-          <Route
-            path="/movies/:movieTitle"
-            element={<MovieDetails movies={movies} />}
-          />
-        </Routes>
+        <LikeContextProvider>
+          <Routes>
+            <Route
+              path="/movies/:movieTitle"
+              element={<MovieDetails movies={movies} />}
+            />
+          </Routes>
+        </LikeContextProvider>
       </MemoryRouter>
     );
 
@@ -56,12 +61,14 @@ describe("MovieDetails", () => {
   it("toggles movie like status", () => {
     render(
       <MemoryRouter initialEntries={["/movies/Inception"]}>
-        <Routes>
-          <Route
-            path="/movies/:movieTitle"
-            element={<MovieDetails movies={movies} />}
-          />
-        </Routes>
+        <LikeContextProvider>
+          <Routes>
+            <Route
+              path="/movies/:movieTitle"
+              element={<MovieDetails movies={movies} />}
+            />
+          </Routes>
+        </LikeContextProvider>
       </MemoryRouter>
     );
 

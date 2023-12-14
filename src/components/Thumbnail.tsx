@@ -11,8 +11,7 @@ import {
 import { useState } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
-import { usetoggleLike } from "../hooks/useLikeContext";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useLikeContext, usetoggleLike } from "../hooks/useLikeContext";
 
 interface ThumbnailProps {
   image: string;
@@ -23,19 +22,18 @@ interface ThumbnailProps {
 }
 
 function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
+  const { likedMovies, setLikedMovies } = useLikeContext();
   const [isLiked, setIsLiked] = useState(false);
-  const [likedMovies, setLikedMovies] = useLocalStorage("likedMovies", []);
   const [imageLoaded, setImageLoaded] = useState(true);
   const [isSmallerThan500] = useMediaQuery("(max-width: 500px)");
   const [isSmallerThan1000] = useMediaQuery("(max-width: 1000px)");
   const [showOverlay, setShowOverlay] = useState(false);
-  
+
   const handleClick = () => {
     navigate(`/movies/${encodeURIComponent(title)}`);
   };
 
   const navigate = useNavigate();
-
 
   function handleToggleLike(event: React.MouseEvent) {
     event.stopPropagation();
@@ -54,11 +52,11 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
       bg="white"
       position="relative"
       transition="transform 0.3s"
-      _hover={{transform: "scale(1.05)"}}
+      _hover={{ transform: "scale(1.05)" }}
       onClick={handleClick}
       cursor="pointer"
       height={imageLoaded ? "auto" : "100%"}
-      onMouseEnter={() => setShowOverlay(true)} 
+      onMouseEnter={() => setShowOverlay(true)}
       onMouseLeave={() => setShowOverlay(false)}
     >
       <Image
@@ -91,7 +89,6 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
         opacity={showOverlay ? "1" : "0"}
         transition="opacity 0.3s"
         _hover={{ opacity: "1" }}
-        
       >
         <Flex direction="column">
           <Heading fontSize={isSmallerThan500 ? "1vw" : "1.5vw"}>

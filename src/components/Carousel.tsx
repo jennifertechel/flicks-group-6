@@ -60,7 +60,7 @@ function Carousel({ movies }: CarouselProps) {
             key={movie.title}
             display="inline-block"
             borderRadius="md"
-            margin="2rem"
+            margin="1vw"
             justifyContent="center"
           >
             <Thumbnail

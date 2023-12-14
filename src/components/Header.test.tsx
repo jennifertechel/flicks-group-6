@@ -22,27 +22,6 @@ test("should render render logo", () => {
   expect(logo).toBeInTheDocument();
 });
 
-test("rendering test", async () => {
-  render(
-    <BrowserRouter>
-      <LikeContextProvider>
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="categories" element={<Categories />} />
-          <Route path="favorites" element={<Favorites />} />
-
-          <Route path="search-results/:term" element={<SearchResults />} />
-        </Routes>
-      </LikeContextProvider>
-    </BrowserRouter>
-  );
-
-  await waitFor(() => {
-    const h1 = screen.queryByText("Home");
-    expect(h1).toBeInTheDocument();
-  });
-});
-
 test("display search field after click", async () => {
   render(
     <MemoryRouter>

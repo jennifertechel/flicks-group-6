@@ -10,8 +10,8 @@ function Favorites() {
   );
 
   return (
-    <Flex flexDir="column" p="4">
-      <Heading pb="4">Favorites</Heading>
+    <Flex flexDir="column" px={35}>
+      <Heading pb={4}>Favorites</Heading>
       <Flex flexDir="column">
         <Grid templateColumns="repeat(auto-fill, minmax(200px, 1fr))" gap={4}>
           {favoriteMovies.map((movie, index) => (

@@ -50,10 +50,11 @@ function Thumbnail({ image, rating, year, title, genre }: ThumbnailProps) {
       onClick={handleClick}
       cursor="pointer"
       height="auto"
+      minH="331px"
       onMouseEnter={() => setShowOverlay(true)}
       onMouseLeave={() => setShowOverlay(false)}
     >
-      <Image src={image} alt={title} />
+      <Image src={image} alt={title} color="black" />
 
       <Box
         bg="rgba(0, 0, 0, 0.9)"

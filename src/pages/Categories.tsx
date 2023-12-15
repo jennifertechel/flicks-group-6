@@ -10,8 +10,7 @@ const genres = Array.from(
 function Categories() {
 	return (
 		<Flex flexDir="column">
-			<Heading>Categories</Heading>
-
+			<Heading mb={4}>Categories</Heading>
 			<Flex flexDir="column">
 				{genres.map((genre) => {
 					const moviesInGenre = data.filter((movie) =>
@@ -20,24 +19,30 @@ function Categories() {
 					if (moviesInGenre.length > 4) {
 						return (
 							<Box key={genre}>
-								<Text>{genre}</Text>
+								<Text mt={4} mb={4}>
+									{genre}
+								</Text>
 								<Carousel genre={genre} movies={moviesInGenre} />
 							</Box>
 						);
 					}
 					return (
 						<Flex flexDir="column" key={genre}>
-							<Text>{genre}</Text>
-							{moviesInGenre.map((movie) => (
-								<Thumbnail
-									key={movie.title}
-									genre={movie.genre}
-									title={movie.title}
-									image={movie.thumbnail}
-									rating={movie.rating}
-									year={movie.year}
-								/>
-							))}
+							<Text mt={4} mb={4}>
+								{genre}
+							</Text>
+							<Flex flexDir="row" gap="20">
+								{moviesInGenre.map((movie) => (
+									<Thumbnail
+										key={movie.title}
+										genre={movie.genre}
+										title={movie.title}
+										image={movie.thumbnail}
+										rating={movie.rating}
+										year={movie.year}
+									/>
+								))}
+							</Flex>
 						</Flex>
 					);
 				})}
